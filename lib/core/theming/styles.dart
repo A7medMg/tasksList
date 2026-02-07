@@ -40,4 +40,9 @@ class TextStyles {
     fontWeight: FontWeightHelper.medium,
     color: ColorsManager.blue,
   );
+  static TextStyle font14BlueMedium = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorsManager.blue,
+  );
 }
