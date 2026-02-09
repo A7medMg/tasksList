@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboardingImage extends StatelessWidget {
-  const OnboardingImage({super.key});
+  final double height;
+  const OnboardingImage({super.key, required this.height});
 
   @override
   Widget build(BuildContext context) {
     return   Image.asset(
       "assets/pngs/onboarding.png",
-      height: 482.h,
+      height: height.h,
       fit: BoxFit.cover,
       width: double.infinity,
     );
