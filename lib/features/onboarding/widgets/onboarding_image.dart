@@ -10,7 +10,7 @@ class OnboardingImage extends StatelessWidget {
     return   Image.asset(
       "assets/pngs/onboarding.png",
       height: height.h,
-      fit: BoxFit.cover,
+      fit: BoxFit.fill,
       width: double.infinity,
     );
   }
