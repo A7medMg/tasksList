@@ -15,7 +15,7 @@ class OnboardingScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            OnboardingImage(),
+            OnboardingImage(height: 482,),
             DescriptionText(),
 
             Padding(
