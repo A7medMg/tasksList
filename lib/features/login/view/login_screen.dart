@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo/features/login/view/widgets/dont_have_account.dart';
 import 'package:todo/features/login/view/widgets/email_and_password.dart';
-import '../../../core/helper/app_regex..dart';
 import '../../../core/helper/spacing.dart';
 import '../../../core/theming/styles.dart';
 import '../../../core/widgets/app_text_button.dart';
-import '../../../core/widgets/app_text_field.dart';
 import '../../onboarding/widgets/onboarding_image.dart';
 
 class LoginScreen extends StatelessWidget {
