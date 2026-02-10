@@ -65,5 +65,14 @@ class TextStyles {
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.primary,
   );
+  static TextStyle font18MixBold = TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.mix,
+  );  static TextStyle font16MixMedium = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorsManager.mix,
+  );
 
 }
