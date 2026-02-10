@@ -1,0 +1,19 @@
+import 'package:dio/dio.dart';
+
+import 'package:retrofit/error_logger.dart';
+import 'package:retrofit/http.dart';
+import 'package:todo/core/network/api_constant.dart';
+import 'package:todo/features/login/data/models/login_request_body.dart';
+import 'package:todo/features/login/data/models/login_respons_body.dart';
+part"api_services.g.dart";
+@RestApi(baseUrl: ApiConstants.apiBaseUrl)
+abstract class ApiServices {
+  factory ApiServices(Dio dio,{String baseUrl}) = _ApiServices;
+  @POST(ApiConstants.login)
+  Future<LoginResponsBody> login(
+      @Body() LoginRequestBody loginRequestBody,
+      );
+
+
+
+}
