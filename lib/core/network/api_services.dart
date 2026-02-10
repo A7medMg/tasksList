@@ -5,6 +5,8 @@ import 'package:retrofit/http.dart';
 import 'package:todo/core/network/api_constant.dart';
 import 'package:todo/features/login/data/models/login_request_body.dart';
 import 'package:todo/features/login/data/models/login_respons_body.dart';
+import 'package:todo/features/signup/data/model/register_request_body.dart';
+import 'package:todo/features/signup/data/model/register_response_body.dart';
 part"api_services.g.dart";
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
 abstract class ApiServices {
@@ -12,6 +14,10 @@ abstract class ApiServices {
   @POST(ApiConstants.login)
   Future<LoginResponsBody> login(
       @Body() LoginRequestBody loginRequestBody,
+      );
+  @POST(ApiConstants.signup)
+  Future<RegisterResponseBody> register(
+      @Body() RegisterRequestBody registerRequestBody,
       );
 
 

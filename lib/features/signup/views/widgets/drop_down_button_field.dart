@@ -47,7 +47,7 @@ class _DropDownButtonFieldState extends State<DropDownButtonField> {
           borderSide: const BorderSide(color: ColorsManager.primary, width: 1.3),
         ),
       ),
-      items: ['Junior', 'Middle', 'Senior']
+      items: ['junior', 'middle', 'senior']
           .map((level) => DropdownMenuItem(
                 value: level,
                 child: Text(level, style: TextStyles.font14BlackRegular),
