@@ -2,6 +2,7 @@ class ApiConstants {
   static const String apiBaseUrl = "https://todo.iraqsapp.com/";
   static const String signup = "auth/register";
   static const String login = "auth/login";
+  static const String profile="auth/profile";
 
 }
 

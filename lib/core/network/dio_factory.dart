@@ -24,7 +24,7 @@ class DioFactory {
 
   static void addDioInterceptor() {
     dio?.interceptors.add(
-      InterceptorsWrapper(
+      QueuedInterceptorsWrapper(
         onRequest: (options, handler) async {
           String? token = await SharedPrefHelper.getString(SharedPrefConstans.saveToken);
           options.headers["Accept"] = "application/json";
@@ -35,19 +35,23 @@ class DioFactory {
         },
         onError: (DioException e, handler) async {
           if (e.response?.statusCode == 401) {
-           
             String? refreshToken = await SharedPrefHelper.getString(SharedPrefConstans.refreshToken);
+
             if (refreshToken != null) {
               try {
+
                 final newAccessToken = await _refreshToken(refreshToken);
+
+
                 await SharedPrefHelper.setData(SharedPrefConstans.saveToken, newAccessToken);
-                
-                
-                e.requestOptions.headers["Authorization"] = "Bearer $newAccessToken";
-                final response = await dio!.fetch(e.requestOptions);
+
+                final options = e.requestOptions;
+                options.headers["Authorization"] = "Bearer $newAccessToken";
+
+                final response = await dio!.fetch(options);
                 return handler.resolve(response);
               } catch (err) {
-               
+
                 return handler.next(e);
               }
             }
@@ -70,8 +74,9 @@ class DioFactory {
     final refreshDio = Dio();
     final response = await refreshDio.get(
       'https://todo.iraqsapp.com/auth/refresh-token',
-      data: {'token': refreshToken},
+      queryParameters: {'token': refreshToken},
     );
+
     return response.data['access_token'];
   }
 }
