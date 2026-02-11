@@ -7,6 +7,7 @@ import 'package:todo/features/signup/views/signup_screen.dart';
 import '../../features/home/views/home_screen.dart';
 import '../../features/login/logic/login_cubit.dart';
 import '../../features/login/view/login_screen.dart';
+import '../../features/profile/logic/get_profile_cubit.dart';
 import '../../features/profile/views/profile_screen.dart';
 import '../../features/signup/logic/sign_up_cubit.dart';
 import '../dl/dependency_injection.dart';
@@ -23,9 +24,8 @@ class AppRouters {
       case RoutersName.home:
         return MaterialPageRoute(builder: (_)=>const HomeScreen());
       case RoutersName.profile:
-        return MaterialPageRoute(builder: (_)=>const ProfileScreen());
+        return MaterialPageRoute(builder: (_)=> BlocProvider(create: (_)=>GetProfileCubit(getIt.get())..emitGetProfileState(),child: ProfileScreen()));
 
-      
 
       default:
         return null;
