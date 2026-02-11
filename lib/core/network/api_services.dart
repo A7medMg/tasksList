@@ -23,6 +23,10 @@ abstract class ApiServices {
       );
   @GET(ApiConstants.profile)
   Future<ProfileInfoModel> getProfile();
+  @POST(ApiConstants.logout)
+  Future<dynamic> logout(
+      @Body() Map<String, dynamic> body,
+      );
 
 
 
