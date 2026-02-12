@@ -1,17 +1,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/core/helper/shared_pref_constants.dart';
-
 import 'package:todo/tasks_app.dart';
-
 import 'core/dl/dependency_injection.dart';
 import 'core/helper/shard_pref_helper.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
+  isFirstTime = await SharedPrefHelper.getBool(SharedPrefConstans.showOnBoarding) ?? true;
   await checkIfUserIsLoggedIn();
    setUp();
 
