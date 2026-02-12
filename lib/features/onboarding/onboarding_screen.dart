@@ -5,6 +5,8 @@ import 'package:todo/core/routing/routers_name.dart';
 import 'package:todo/core/theming/styles.dart';
 import 'package:todo/features/onboarding/widgets/description_text.dart';
 import 'package:todo/features/onboarding/widgets/onboarding_image.dart';
+import '../../core/helper/shard_pref_helper.dart';
+import '../../core/helper/shared_pref_constants.dart';
 import '../../core/widgets/app_text_button.dart';
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -25,8 +27,10 @@ class OnboardingScreen extends StatelessWidget {
                 svgUrl: "assets/svgs/Arrow - Left.svg",
                 buttonText: 'Let’s Start',
                 textStyle: TextStyles.font19WhiteBold,
-                onPressed: () {
-                  context.pushReplacementNamed(RoutersName.login);
+                onPressed: ()async {
+                  await SharedPrefHelper.setData(SharedPrefConstans.showOnBoarding, true);
+                  context.pushNamedAndRemoveUntil(RoutersName.login, predicate: (route) => false);
+
 
                 },
               ),
