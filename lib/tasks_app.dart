@@ -20,11 +20,20 @@ class TasksApp extends StatelessWidget {
             fontFamily: "DMSans"
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute:isLogin? RoutersName.home:RoutersName.onboarding,
+          initialRoute:getInitialRoute(),
           onGenerateRoute: AppRouters().generateRoute,
         );
       },
 
     );
+  }
+  String getInitialRoute() {
+    if (isFirstTime==false) {
+      return RoutersName.onboarding;
+    } else if (isLogin) {
+      return RoutersName.home;
+    } else {
+      return RoutersName.login;
+    }
   }
 }

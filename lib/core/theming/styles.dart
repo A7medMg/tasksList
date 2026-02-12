@@ -5,6 +5,11 @@ import 'package:todo/core/theming/weight_helper.dart';
 import 'colors_manager.dart';
 
 class TextStyles {
+  static TextStyle font12SecondeRegular = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.secondary,
+  );
   static TextStyle font19WhiteBold = TextStyle(
     fontSize: 19.sp,
     fontWeight: FontWeightHelper.bold,
@@ -34,6 +39,11 @@ class TextStyles {
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.black,
+  );
+  static TextStyle font16PrimaryBold = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.primary,
   );
   static TextStyle font16WhiteBold = TextStyle(
     fontSize: 16.sp,
@@ -73,6 +83,11 @@ class TextStyles {
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.medium,
     color: ColorsManager.mix,
+  );
+  static TextStyle font19PrimaryMedium = TextStyle(
+    fontSize: 19.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorsManager.primary,
   );
 
 }

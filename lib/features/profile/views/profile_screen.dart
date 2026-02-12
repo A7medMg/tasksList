@@ -17,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
 
       body: Padding(
-        padding:  EdgeInsets.symmetric(vertical: 56.w,horizontal: 22),
+        padding:  EdgeInsets.symmetric(vertical: 56.h,horizontal: 22.w),
         child: Column(
           children: [
             CustomAppBar(title: "Profile",),
