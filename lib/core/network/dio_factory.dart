@@ -44,6 +44,9 @@ class DioFactory {
 
 
                 await SharedPrefHelper.setData(SharedPrefConstans.saveToken, newAccessToken);
+                if (e.requestOptions.data is FormData) {
+                  return handler.next(e);
+                }
 
                 final options = e.requestOptions;
                 options.headers["Authorization"] = "Bearer $newAccessToken";

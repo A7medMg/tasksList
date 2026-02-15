@@ -1,8 +1,11 @@
+
+
 import 'package:dio/dio.dart';
 
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import 'package:todo/core/network/api_constant.dart';
+import 'package:todo/features/add_task/data/models/add_task_request_body.dart';
 import 'package:todo/features/login/data/models/login_request_body.dart';
 import 'package:todo/features/login/data/models/login_respons_body.dart';
 import 'package:todo/features/signup/data/model/register_request_body.dart';
@@ -27,7 +30,15 @@ abstract class ApiServices {
   Future<dynamic> logout(
       @Body() Map<String, dynamic> body,
       );
-
+  @POST(ApiConstants.uploadImage)
+  @MultiPart()
+  Future<dynamic> uploadImage(
+      @Part(name: "image") MultipartFile image,
+      );
+  @POST(ApiConstants.createTasks)
+  Future<void> createTask(
+      @Body() AddTaskRequestBody addTaskRequestBody,
+      );
 
 
 }

@@ -57,6 +57,7 @@ dependencies:
   json_serializable: ^6.11.4
   build_runner: ^2.10.5
   dotted_border: ^3.1.0
+  image_picker: ^1.2.1
 
 flutter_launcher_icons:
   android: true
