@@ -5,6 +5,7 @@ import 'package:todo/features/logout/logic/logout_cubit.dart';
 import 'package:todo/features/onboarding/onboarding_screen.dart';
 import 'package:todo/features/signup/views/signup_screen.dart';
 
+import '../../features/add_task/logic/add_task_cubit.dart';
 import '../../features/add_task/views/add_task_screen.dart';
 import '../../features/home/views/home_screen.dart';
 import '../../features/login/logic/login_cubit.dart';
@@ -28,7 +29,7 @@ class AppRouters {
       case RoutersName.profile:
         return MaterialPageRoute(builder: (_)=> BlocProvider(create: (_)=>GetProfileCubit(getIt.get())..emitGetProfileState(),child: ProfileScreen()));
       case RoutersName.addTask:
-        return MaterialPageRoute(builder: (_)=>const AddTaskScreen());
+        return MaterialPageRoute(builder: (_)=>BlocProvider(create: (_)=>AddTaskCubit(getIt.get()),child: AddTaskScreen()));
 
       default:
         return null;

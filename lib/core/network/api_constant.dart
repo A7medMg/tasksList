@@ -4,7 +4,8 @@ class ApiConstants {
   static const String login = "auth/login";
   static const String profile="auth/profile";
   static const String logout="auth/logout";
-
+  static const String uploadImage="upload/image";
+  static const String createTasks="todos";
 }
 
 class ApiErrors {
