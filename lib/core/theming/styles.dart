@@ -10,6 +10,16 @@ class TextStyles {
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.secondary,
   );
+  static TextStyle font12PrimaryRegular = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.primary,
+  );
+  static TextStyle font16SecondeBold = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.secondary,
+  );
   static TextStyle font19WhiteBold = TextStyle(
     fontSize: 19.sp,
     fontWeight: FontWeightHelper.bold,
