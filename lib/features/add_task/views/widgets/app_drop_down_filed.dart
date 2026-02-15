@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo/core/theming/styles.dart';
 
 import '../../../../core/theming/colors_manager.dart';
+import '../../logic/add_task_cubit.dart';
 
 class AppDropDownFiled extends StatefulWidget {
   final EdgeInsetsGeometry? contentPadding;
@@ -19,12 +21,12 @@ class AppDropDownFiled extends StatefulWidget {
 }
 
 class _AppDropDownFiledState extends State<AppDropDownFiled> {
-  String value="medium";
+
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<dynamic>(
 
-      initialValue: value,
+      initialValue: context.read<AddTaskCubit>().priority,
       decoration:InputDecoration(
         fillColor:widget.fillColor,
         filled:widget.fillColor?.value!=null ?true:false ,
@@ -74,8 +76,7 @@ class _AppDropDownFiledState extends State<AppDropDownFiled> {
       ],
       onChanged: (dynamic d) {
         setState(() {
-          value=d;
-          print(value);
+          context.read<AddTaskCubit>().priority=d;
         });
 
       },);
