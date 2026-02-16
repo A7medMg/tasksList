@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:todo/features/home/data/models/task_response_model.dart';
 
+import '../../../../core/helper/extensions.dart';
 import '../../../../core/helper/spacing.dart';
+import '../../../../core/routing/routers_name.dart';
 import '../../../../core/theming/colors_manager.dart';
 import '../../../../core/theming/styles.dart';
 
@@ -14,57 +16,62 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 66.w,
-            height: 66.h,
-            child: Image.network(
-              "https://todo.iraqsapp.com/images/${taskModel?.image ??"N/a"}",
+    return GestureDetector(
+      onTap: (){
+        context.pushNamed(RoutersName.taskDetails,arguments: taskModel);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 66.w,
+              height: 66.h,
+              child: Image.network(
+                "https://todo.iraqsapp.com/images/${taskModel?.image ??"N/a"}",
 
-              fit: BoxFit.contain,
-            ),
-          ),
-
-
-
-          Expanded(
-            child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 12.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          taskModel?.title??"N/a",style: TextStyles.font16BlackBold,),
-                      ),
-                      horizontalSpacing(8),
-                      taskStatus(taskModel?.status??"Waiting"),
-
-                    ],
-                  ),
-                  Text(
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    taskModel?.desc??"N/a",
-                    style: TextStyles.font14SecondeRegular,
-                  ),
-                  taskPriority(taskModel?.priority??"Medium",taskModel?.createdAt??"N/a")
-
-                ],
+                fit: BoxFit.contain,
               ),
             ),
-          ),
-          SvgPicture.asset("assets/svgs/3dots.svg")
-        ],
+
+
+
+            Expanded(
+              child: Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 12.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            taskModel?.title??"N/a",style: TextStyles.font16BlackBold,),
+                        ),
+                        horizontalSpacing(8),
+                        taskStatus(taskModel?.status??"Waiting"),
+
+                      ],
+                    ),
+                    Text(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      taskModel?.desc??"N/a",
+                      style: TextStyles.font14SecondeRegular,
+                    ),
+                    taskPriority(taskModel?.priority??"Medium",taskModel?.createdAt??"N/a")
+
+                  ],
+                ),
+              ),
+            ),
+            SvgPicture.asset("assets/svgs/3dots.svg")
+          ],
+        ),
       ),
     );
   }
