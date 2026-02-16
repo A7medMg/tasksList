@@ -8,6 +8,6 @@ class AddTaskState<T>with _$AddTaskState<T> {
  const factory AddTaskState.success() = AddImageSuccess;
  const factory AddTaskState.failure({required String error}) =AddImageError;
  const factory AddTaskState.taskLoading() = AddtaskLoading;
- const factory AddTaskState.taskSuccess() = AddtaskSuccess;
+ const factory AddTaskState.taskSuccess(T data) = AddtaskSuccess<T>;
  const factory AddTaskState.taskFailure({required String error}) =AddtaskError;
 }
