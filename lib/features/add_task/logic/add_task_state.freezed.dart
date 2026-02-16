@@ -137,7 +137,7 @@ return taskFailure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  success,TResult Function( String error)?  failure,TResult Function()?  taskLoading,TResult Function()?  taskSuccess,TResult Function( String error)?  taskFailure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  success,TResult Function( String error)?  failure,TResult Function()?  taskLoading,TResult Function( T data)?  taskSuccess,TResult Function( String error)?  taskFailure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case AddImageLoading() when loading != null:
@@ -145,7 +145,7 @@ return loading();case AddImageSuccess() when success != null:
 return success();case AddImageError() when failure != null:
 return failure(_that.error);case AddtaskLoading() when taskLoading != null:
 return taskLoading();case AddtaskSuccess() when taskSuccess != null:
-return taskSuccess();case AddtaskError() when taskFailure != null:
+return taskSuccess(_that.data);case AddtaskError() when taskFailure != null:
 return taskFailure(_that.error);case _:
   return orElse();
 
@@ -164,7 +164,7 @@ return taskFailure(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  success,required TResult Function( String error)  failure,required TResult Function()  taskLoading,required TResult Function()  taskSuccess,required TResult Function( String error)  taskFailure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  success,required TResult Function( String error)  failure,required TResult Function()  taskLoading,required TResult Function( T data)  taskSuccess,required TResult Function( String error)  taskFailure,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case AddImageLoading():
@@ -172,7 +172,7 @@ return loading();case AddImageSuccess():
 return success();case AddImageError():
 return failure(_that.error);case AddtaskLoading():
 return taskLoading();case AddtaskSuccess():
-return taskSuccess();case AddtaskError():
+return taskSuccess(_that.data);case AddtaskError():
 return taskFailure(_that.error);case _:
   throw StateError('Unexpected subclass');
 
@@ -190,7 +190,7 @@ return taskFailure(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  success,TResult? Function( String error)?  failure,TResult? Function()?  taskLoading,TResult? Function()?  taskSuccess,TResult? Function( String error)?  taskFailure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  success,TResult? Function( String error)?  failure,TResult? Function()?  taskLoading,TResult? Function( T data)?  taskSuccess,TResult? Function( String error)?  taskFailure,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case AddImageLoading() when loading != null:
@@ -198,7 +198,7 @@ return loading();case AddImageSuccess() when success != null:
 return success();case AddImageError() when failure != null:
 return failure(_that.error);case AddtaskLoading() when taskLoading != null:
 return taskLoading();case AddtaskSuccess() when taskSuccess != null:
-return taskSuccess();case AddtaskError() when taskFailure != null:
+return taskSuccess(_that.data);case AddtaskError() when taskFailure != null:
 return taskFailure(_that.error);case _:
   return null;
 
@@ -405,33 +405,67 @@ String toString() {
 
 
 class AddtaskSuccess<T> implements AddTaskState<T> {
-  const AddtaskSuccess();
+  const AddtaskSuccess(this.data);
   
 
+ final  T data;
 
-
+/// Create a copy of AddTaskState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AddtaskSuccessCopyWith<T, AddtaskSuccess<T>> get copyWith => _$AddtaskSuccessCopyWithImpl<T, AddtaskSuccess<T>>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddtaskSuccess<T>);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddtaskSuccess<T>&&const DeepCollectionEquality().equals(other.data, data));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(data));
 
 @override
 String toString() {
-  return 'AddTaskState<$T>.taskSuccess()';
+  return 'AddTaskState<$T>.taskSuccess(data: $data)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $AddtaskSuccessCopyWith<T,$Res> implements $AddTaskStateCopyWith<T, $Res> {
+  factory $AddtaskSuccessCopyWith(AddtaskSuccess<T> value, $Res Function(AddtaskSuccess<T>) _then) = _$AddtaskSuccessCopyWithImpl;
+@useResult
+$Res call({
+ T data
+});
 
 
+
+
+}
+/// @nodoc
+class _$AddtaskSuccessCopyWithImpl<T,$Res>
+    implements $AddtaskSuccessCopyWith<T, $Res> {
+  _$AddtaskSuccessCopyWithImpl(this._self, this._then);
+
+  final AddtaskSuccess<T> _self;
+  final $Res Function(AddtaskSuccess<T>) _then;
+
+/// Create a copy of AddTaskState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? data = freezed,}) {
+  return _then(AddtaskSuccess<T>(
+freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as T,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

@@ -16,7 +16,7 @@ class TasksApp extends StatelessWidget {
       builder: (context, child) {
             return MaterialApp(
           theme: ThemeData(
-            scaffoldBackgroundColor: ColorsManager.white,
+            scaffoldBackgroundColor: ColorsManager.white  ,
             fontFamily: "DMSans"
           ),
           debugShowCheckedModeBanner: false,

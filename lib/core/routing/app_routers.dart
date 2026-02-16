@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/core/routing/routers_name.dart';
+import 'package:todo/features/home/logic/home_cubit.dart';
 import 'package:todo/features/logout/logic/logout_cubit.dart';
 import 'package:todo/features/onboarding/onboarding_screen.dart';
 import 'package:todo/features/signup/views/signup_screen.dart';
@@ -25,7 +26,10 @@ class AppRouters {
       case RoutersName.signUp:
         return MaterialPageRoute(builder: (_)=> BlocProvider(create: (_)=>SignUpCubit(getIt.get()),child: SignupScreen()));
       case RoutersName.home:
-        return MaterialPageRoute(builder: (_)=> BlocProvider(create: (_)=>LogoutCubit(getIt.get()),child: HomeScreen()));
+        return MaterialPageRoute(builder: (_)=> MultiBlocProvider(providers: [
+          BlocProvider(create: (_)=>LogoutCubit(getIt.get())),
+          BlocProvider(create: (_)=>HomeCubit(getIt.get())),
+        ], child: HomeScreen()));
       case RoutersName.profile:
         return MaterialPageRoute(builder: (_)=> BlocProvider(create: (_)=>GetProfileCubit(getIt.get())..emitGetProfileState(),child: ProfileScreen()));
       case RoutersName.addTask:

@@ -28,7 +28,7 @@ class AddTaskBlocListener extends StatelessWidget {
               ),
             );
           },
-          taskSuccess: (){
+          taskSuccess: (newTask){
             context.pop();
             FocusScope.of(context).unfocus();
             context.read<AddTaskCubit>().resetForm();
@@ -36,6 +36,7 @@ class AddTaskBlocListener extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text("تم عمل التاسك بنجاح ✅"), backgroundColor: Colors.green),
             );
+            Navigator.pop(context, newTask);
 
 
           },

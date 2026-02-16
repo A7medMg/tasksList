@@ -156,13 +156,15 @@ class _ApiServices implements ApiServices {
   }
 
   @override
-  Future<void> createTask(AddTaskRequestBody addTaskRequestBody) async {
+  Future<TaskResponseModel> createTask(
+    AddTaskRequestBody addTaskRequestBody,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(addTaskRequestBody.toJson());
-    final _options = _setStreamType<void>(
+    final _options = _setStreamType<TaskResponseModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -172,7 +174,47 @@ class _ApiServices implements ApiServices {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    await _dio.fetch<void>(_options);
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late TaskResponseModel _value;
+    try {
+      _value = TaskResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<List<TaskResponseModel>> getTodos(int page) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'page': page};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<List<TaskResponseModel>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'todos',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<TaskResponseModel> _value;
+    try {
+      _value = _result.data!
+          .map(
+            (dynamic i) =>
+                TaskResponseModel.fromJson(i as Map<String, dynamic>),
+          )
+          .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

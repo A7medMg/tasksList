@@ -5,6 +5,7 @@ import 'package:todo/core/network/api_error_handel.dart';
 import 'package:todo/core/network/api_result.dart';
 import 'package:todo/core/network/api_services.dart';
 
+import '../../../home/data/models/task_response_model.dart';
 import '../models/add_task_request_body.dart';
 
 class AddTaskRepo {
@@ -35,7 +36,7 @@ class AddTaskRepo {
     }
 
   }
-  Future<ApiResult<void>>createTask(AddTaskRequestBody addTaskRequestBody)async{
+  Future<ApiResult<TaskResponseModel>>createTask(AddTaskRequestBody addTaskRequestBody)async{
     try{
       var responseData=await apiServices.createTask(addTaskRequestBody);
       return ApiResult.success(responseData);
