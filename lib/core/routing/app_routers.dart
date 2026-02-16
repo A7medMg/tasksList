@@ -8,12 +8,14 @@ import 'package:todo/features/signup/views/signup_screen.dart';
 
 import '../../features/add_task/logic/add_task_cubit.dart';
 import '../../features/add_task/views/add_task_screen.dart';
+import '../../features/home/data/models/task_response_model.dart';
 import '../../features/home/views/home_screen.dart';
 import '../../features/login/logic/login_cubit.dart';
 import '../../features/login/view/login_screen.dart';
 import '../../features/profile/logic/get_profile_cubit.dart';
 import '../../features/profile/views/profile_screen.dart';
 import '../../features/signup/logic/sign_up_cubit.dart';
+import '../../features/task_details/task_details_screen.dart';
 import '../dl/dependency_injection.dart';
 
 class AppRouters {
@@ -34,7 +36,8 @@ class AppRouters {
         return MaterialPageRoute(builder: (_)=> BlocProvider(create: (_)=>GetProfileCubit(getIt.get())..emitGetProfileState(),child: ProfileScreen()));
       case RoutersName.addTask:
         return MaterialPageRoute(builder: (_)=>BlocProvider(create: (_)=>AddTaskCubit(getIt.get()),child: AddTaskScreen()));
-
+      case RoutersName.taskDetails:
+        return MaterialPageRoute(builder: (_)=> TaskDetailsScreen(taskModel: settings.arguments as TaskResponseModel,));
       default:
         return null;
     }

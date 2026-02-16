@@ -13,8 +13,10 @@ class AppDropDownFiled extends StatefulWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final Color? fillColor;
+  final String initialValue;
 
-  const AppDropDownFiled({super.key, this.contentPadding, this.enabledBorder, this.focusedBorder, this.suffixIcon, this.prefixIcon, this.fillColor});
+
+  const AppDropDownFiled({super.key, this.contentPadding, this.enabledBorder, this.focusedBorder, this.suffixIcon, this.prefixIcon, this.fillColor, required this.initialValue});
 
   @override
   State<AppDropDownFiled> createState() => _AppDropDownFiledState();
@@ -26,7 +28,7 @@ class _AppDropDownFiledState extends State<AppDropDownFiled> {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<dynamic>(
 
-      initialValue: context.read<AddTaskCubit>().priority,
+      initialValue:widget.initialValue,
       decoration:InputDecoration(
         fillColor:widget.fillColor,
         filled:widget.fillColor?.value!=null ?true:false ,

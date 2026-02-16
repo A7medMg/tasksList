@@ -40,6 +40,11 @@ class TextStyles {
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.black,
   );
+  static TextStyle font14OrangBold = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.lightOrang,
+  );
   static TextStyle font24BlackBold = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeightHelper.bold,
