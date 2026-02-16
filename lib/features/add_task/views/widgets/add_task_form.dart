@@ -49,6 +49,8 @@ class _AddTaskFormState extends State<AddTaskForm> {
           CustomTitle(title: "Priority"),
           verticalSpacing(8),
           AppDropDownFiled(
+            initialValue: context.read<AddTaskCubit>().priority,
+
             suffixIcon: SvgPicture.asset("assets/svgs/Arrow - Down 4.svg"),
             prefixIcon: Padding(
               padding:  EdgeInsets.all(10.r),

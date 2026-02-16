@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../features/task_details/widgets/pop_edit_menu.dart';
 import '../helper/extensions.dart';
 import '../helper/spacing.dart';
 import '../theming/styles.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;
-  const CustomAppBar({super.key,required this.title});
+  final String ?icon;
+  const CustomAppBar({super.key,required this.title, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,9 @@ class CustomAppBar extends StatelessWidget {
           child: SvgPicture.asset("assets/svgs/Arrow _right.svg")),
       horizontalSpacing(8),
       Text(title,style: TextStyles.font16BlackBold,),
+      const Spacer(),
+      if(icon!=null)
+        PopEditMenu(iconUrl: icon!,),
     ],);
   }
 }
