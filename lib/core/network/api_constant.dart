@@ -6,6 +6,8 @@ class ApiConstants {
   static const String logout="auth/logout";
   static const String uploadImage="upload/image";
   static const String createTasks="todos";
+  static const String getTasks="todos";
+
 }
 
 class ApiErrors {

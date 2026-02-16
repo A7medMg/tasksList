@@ -46,8 +46,8 @@ class AddTaskCubit extends Cubit<AddTaskState> {
         )
     );
     result.when(
-        success: (_) {
-          emit(AddTaskState.taskSuccess());
+        success: (data) {
+          emit(AddTaskState.taskSuccess(data));
         },
         failure: (e) {
           emit(AddTaskState.taskFailure(

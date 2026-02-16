@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:todo/features/add_task/data/repos/add_task_repo.dart';
+import 'package:todo/features/home/data/repos/get_task_repo.dart';
 import 'package:todo/features/profile/data/repos/get_profile_repo.dart';
 import 'package:todo/features/signup/data/repo/register_repo.dart';
 import '../../features/login/data/repos/login_repo.dart';
@@ -20,5 +21,7 @@ Future <void>setUp()async{
   getIt.registerLazySingleton<GetProfileRepo>(()=>GetProfileRepo(getIt.get()));
   // upload task
   getIt.registerLazySingleton<AddTaskRepo>(()=>AddTaskRepo(getIt.get()));
+  /// tasks
+    getIt.registerLazySingleton<GetTaskRepo>(()=>GetTaskRepo(getIt.get()));
 
 }

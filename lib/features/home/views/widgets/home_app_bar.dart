@@ -16,6 +16,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(56);
   Widget build(BuildContext context) {
     return AppBar(
+      scrolledUnderElevation: 0,
       actionsPadding: EdgeInsetsGeometry.symmetric(horizontal: 22.w),
       elevation: 0,
       backgroundColor: ColorsManager.white,

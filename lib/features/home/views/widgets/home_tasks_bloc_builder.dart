@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/features/home/views/widgets/task_item.dart';
+
+import '../../logic/home_cubit.dart';
+import '../../logic/home_state.dart';
+import 'home_task_shimmer.dart';
+
+class HomeTasksBlocBuilder extends StatelessWidget {
+  const HomeTasksBlocBuilder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomeCubit, TodoState>(
+      buildWhen:(previous, current)=>current is TodoLoading || current is TodoSuccess || current is TodoError,
+      builder:(context,state){
+       return state.maybeWhen(
+         loading:(){
+           return TaskItemShimmer();
+         },
+         success: (todos){
+           return Expanded(child:
+           ListView.builder(
+
+             controller: context.read<HomeCubit>().scrollController,
+               itemCount: todos.length,
+               itemBuilder: (context,index){
+               return TaskItem(taskModel: index<todos.length?todos[index]:null);
+               }),
+
+           );
+
+         },
+         error: (error){
+           return Text(error);
+         },
+         orElse: (){
+           return const SizedBox.shrink();
+         }
+
+       );
+      } ,
+    );
+  }
+}
