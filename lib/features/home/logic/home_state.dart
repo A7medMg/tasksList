@@ -9,4 +9,7 @@ class TodoState with _$TodoState {
   const factory TodoState.loading() = TodoLoading;
   const factory TodoState.success(List<TaskResponseModel> todos) = TodoSuccess;
   const factory TodoState.error(String message) = TodoError;
+  const factory TodoState.deleteError(String message) = TodoDeleteError;
+  const factory TodoState.deleteActionSuccess() = TodoDeleteActionSuccess;
+
 }

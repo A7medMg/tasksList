@@ -44,6 +44,10 @@ abstract class ApiServices {
   Future<List<TaskResponseModel>> getTodos(
       @Query("page") int page,
       );
+  @DELETE(ApiConstants.deleteTasks)
+  Future<dynamic> deleteTask(
+      @Path("id") String id,
+      );
 
 
 }

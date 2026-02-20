@@ -11,7 +11,16 @@ class HomeTasksBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, TodoState>(
+    return BlocConsumer<HomeCubit, TodoState>(
+      listenWhen: (previous, current)=>current is TodoDeleteError ,
+      listener: (context, state) {
+        state.maybeWhen(
+          deleteError: (error){
+            ScaffoldMessenger.of(context).showSnackBar(
+               SnackBar(content: Text("Something went wrong ❌ :$error"), backgroundColor: Colors.red),
+            );
+          }, orElse: () {  },);
+      },
       buildWhen:(previous, current)=>current is TodoLoading || current is TodoSuccess || current is TodoError,
       builder:(context,state){
        return state.maybeWhen(
