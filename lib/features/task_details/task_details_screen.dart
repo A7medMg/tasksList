@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:todo/core/theming/colors_manager.dart';
-
+import 'package:todo/features/task_details/widgets/date_priority_status_form.dart';
+import 'package:todo/features/task_details/widgets/delete_bloc_listener.dart';
 import '../../core/helper/spacing.dart';
 import '../../core/theming/styles.dart';
-import '../../core/widgets/app_text_field.dart';
 import '../../core/widgets/custom_app_bar.dart';
 import '../home/data/models/task_response_model.dart';
 
@@ -37,7 +35,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomAppBar(title: "Task Details",icon:"assets/svgs/3dots.svg" ,),
+              CustomAppBar(title: "Task Details",icon:"assets/svgs/3dots.svg" ,taskId:widget.taskModel.id ,),
               verticalSpacing(12),
               SizedBox(
                 height:225 .h,
@@ -49,81 +47,9 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
               verticalSpacing(8),
               Text(widget.taskModel.desc!,style: TextStyles.font14SecondeRegular,),
               verticalSpacing(26),
-              AppTextFormField(
-                style: TextStyles.font14SecondeRegular,
-                fillColor: ColorsManager.lightPrimary,
-                enabledBorder:  OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(
-                    color: ColorsManager.primary,
-                    width: 1.3,
-                  ),
-                ) ,
-          
-                controller:dateController ,
-                suffixIcon: Padding(
-                  padding:  EdgeInsets.all(10.r),
-                  child: SvgPicture.asset("assets/svgs/calendar.svg"),
-                ),
-                isReadOnly: true,
-                hintText: "", validator: (date) {
-                if (date!.isEmpty) {
-                  return "Task date is required";
-                }
-              },),
-              verticalSpacing(8),
-              AppTextFormField(
-                style: TextStyles.font16PrimaryBold,
-                fillColor: ColorsManager.lightPrimary,
-                enabledBorder:  OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(
-                    color: ColorsManager.primary,
-                    width: 1.3,
-                  ),
-                ) ,
-          
-                controller:statusController ,
-                suffixIcon: Padding(
-                  padding:  EdgeInsets.all(10.r),
-                  child: SvgPicture.asset("assets/svgs/Arrow - Down 4.svg"),
-                ),
-                isReadOnly: true,
-                hintText: "", validator: (date) {
-                if (date!.isEmpty) {
-                  return null;
-                }
-              },),
-              verticalSpacing(8),
-              AppTextFormField(
-                style: TextStyles.font16PrimaryBold,
-                fillColor: ColorsManager.lightPrimary,
-                enabledBorder:  OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(
-                    color: ColorsManager.primary,
-                    width: 1.3,
-                  ),
-                ) ,
-          
-                controller:priorityController ,
-                prefixIcon: Padding(
-              padding:  EdgeInsets.all(10.r),
-          child: SvgPicture.asset("assets/svgs/flag.svg"),
-                     ) ,
-                suffixIcon: Padding(
-                  padding:  EdgeInsets.all(10.r),
-                  child: SvgPicture.asset("assets/svgs/Arrow - Down 4.svg"),
-                ),
-                isReadOnly: true,
-                hintText: "", validator: (date) {
-                if (date!.isEmpty) {
-                  return null;
-                }
-              },),
-          
-          
-          
+              DatePriorityStatusForm(dateController: dateController, priorityController: priorityController, statusController: statusController),
+              DeleteBlocListener()
+
             ],
           ),
         ),

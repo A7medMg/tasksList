@@ -54,6 +54,32 @@ class HomeCubit extends Cubit<TodoState> {
       },
     );
   }
+
+  Future<void> deleteTask(String taskId) async {
+    final taskIndex = allTodos.indexWhere((t) => t.id == taskId);
+    if (taskIndex == -1) return;
+
+    final backupTask = allTodos[taskIndex];
+
+    allTodos.removeAt(taskIndex);
+    emit(TodoState.success(List.from(allTodos)));
+
+    final result = await getTaskRepo.deleteTask(taskId);
+
+    result.when(
+      success: (_) {
+        emit(const TodoState.deleteActionSuccess());
+        emit(TodoState.success(List.from(allTodos)));
+      },
+      failure: (error) {
+        // التراجع (Rollback)
+        allTodos.insert(taskIndex, backupTask);
+        emit(TodoState.success(List.from(allTodos)));
+        emit(TodoState.deleteError(error.apiErrorModel.message ?? "Error"));
+      },
+    );
+  }
+
   void addSingleTaskLocally(TaskResponseModel newTask) {
     allTodos.insert(0, newTask);
     emit(TodoState.success(List.from(allTodos)));

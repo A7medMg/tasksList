@@ -55,14 +55,16 @@ extension TodoStatePatterns on TodoState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( TodoLoading value)?  loading,TResult Function( TodoSuccess value)?  success,TResult Function( TodoError value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( TodoLoading value)?  loading,TResult Function( TodoSuccess value)?  success,TResult Function( TodoError value)?  error,TResult Function( TodoDeleteError value)?  deleteError,TResult Function( TodoDeleteActionSuccess value)?  deleteActionSuccess,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case TodoLoading() when loading != null:
 return loading(_that);case TodoSuccess() when success != null:
 return success(_that);case TodoError() when error != null:
-return error(_that);case _:
+return error(_that);case TodoDeleteError() when deleteError != null:
+return deleteError(_that);case TodoDeleteActionSuccess() when deleteActionSuccess != null:
+return deleteActionSuccess(_that);case _:
   return orElse();
 
 }
@@ -80,14 +82,16 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( TodoLoading value)  loading,required TResult Function( TodoSuccess value)  success,required TResult Function( TodoError value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( TodoLoading value)  loading,required TResult Function( TodoSuccess value)  success,required TResult Function( TodoError value)  error,required TResult Function( TodoDeleteError value)  deleteError,required TResult Function( TodoDeleteActionSuccess value)  deleteActionSuccess,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case TodoLoading():
 return loading(_that);case TodoSuccess():
 return success(_that);case TodoError():
-return error(_that);case _:
+return error(_that);case TodoDeleteError():
+return deleteError(_that);case TodoDeleteActionSuccess():
+return deleteActionSuccess(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +108,16 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( TodoLoading value)?  loading,TResult? Function( TodoSuccess value)?  success,TResult? Function( TodoError value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( TodoLoading value)?  loading,TResult? Function( TodoSuccess value)?  success,TResult? Function( TodoError value)?  error,TResult? Function( TodoDeleteError value)?  deleteError,TResult? Function( TodoDeleteActionSuccess value)?  deleteActionSuccess,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case TodoLoading() when loading != null:
 return loading(_that);case TodoSuccess() when success != null:
 return success(_that);case TodoError() when error != null:
-return error(_that);case _:
+return error(_that);case TodoDeleteError() when deleteError != null:
+return deleteError(_that);case TodoDeleteActionSuccess() when deleteActionSuccess != null:
+return deleteActionSuccess(_that);case _:
   return null;
 
 }
@@ -128,13 +134,15 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<TaskResponseModel> todos)?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<TaskResponseModel> todos)?  success,TResult Function( String message)?  error,TResult Function( String message)?  deleteError,TResult Function()?  deleteActionSuccess,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case TodoLoading() when loading != null:
 return loading();case TodoSuccess() when success != null:
 return success(_that.todos);case TodoError() when error != null:
-return error(_that.message);case _:
+return error(_that.message);case TodoDeleteError() when deleteError != null:
+return deleteError(_that.message);case TodoDeleteActionSuccess() when deleteActionSuccess != null:
+return deleteActionSuccess();case _:
   return orElse();
 
 }
@@ -152,13 +160,15 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<TaskResponseModel> todos)  success,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<TaskResponseModel> todos)  success,required TResult Function( String message)  error,required TResult Function( String message)  deleteError,required TResult Function()  deleteActionSuccess,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case TodoLoading():
 return loading();case TodoSuccess():
 return success(_that.todos);case TodoError():
-return error(_that.message);case _:
+return error(_that.message);case TodoDeleteError():
+return deleteError(_that.message);case TodoDeleteActionSuccess():
+return deleteActionSuccess();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +185,15 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<TaskResponseModel> todos)?  success,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<TaskResponseModel> todos)?  success,TResult? Function( String message)?  error,TResult? Function( String message)?  deleteError,TResult? Function()?  deleteActionSuccess,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case TodoLoading() when loading != null:
 return loading();case TodoSuccess() when success != null:
 return success(_that.todos);case TodoError() when error != null:
-return error(_that.message);case _:
+return error(_that.message);case TodoDeleteError() when deleteError != null:
+return deleteError(_that.message);case TodoDeleteActionSuccess() when deleteActionSuccess != null:
+return deleteActionSuccess();case _:
   return null;
 
 }
@@ -390,5 +402,103 @@ as String,
 
 
 }
+
+/// @nodoc
+
+
+class TodoDeleteError implements TodoState {
+  const TodoDeleteError(this.message);
+  
+
+ final  String message;
+
+/// Create a copy of TodoState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TodoDeleteErrorCopyWith<TodoDeleteError> get copyWith => _$TodoDeleteErrorCopyWithImpl<TodoDeleteError>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TodoDeleteError&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'TodoState.deleteError(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $TodoDeleteErrorCopyWith<$Res> implements $TodoStateCopyWith<$Res> {
+  factory $TodoDeleteErrorCopyWith(TodoDeleteError value, $Res Function(TodoDeleteError) _then) = _$TodoDeleteErrorCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class _$TodoDeleteErrorCopyWithImpl<$Res>
+    implements $TodoDeleteErrorCopyWith<$Res> {
+  _$TodoDeleteErrorCopyWithImpl(this._self, this._then);
+
+  final TodoDeleteError _self;
+  final $Res Function(TodoDeleteError) _then;
+
+/// Create a copy of TodoState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(TodoDeleteError(
+null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class TodoDeleteActionSuccess implements TodoState {
+  const TodoDeleteActionSuccess();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TodoDeleteActionSuccess);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'TodoState.deleteActionSuccess()';
+}
+
+
+}
+
+
+
 
 // dart format on
