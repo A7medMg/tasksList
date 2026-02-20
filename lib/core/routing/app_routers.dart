@@ -37,7 +37,13 @@ class AppRouters {
       case RoutersName.addTask:
         return MaterialPageRoute(builder: (_)=>BlocProvider(create: (_)=>AddTaskCubit(getIt.get()),child: AddTaskScreen()));
       case RoutersName.taskDetails:
-        return MaterialPageRoute(builder: (_)=> TaskDetailsScreen(taskModel: settings.arguments as TaskResponseModel,));
+        final arguments = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(builder: (_)=> BlocProvider.value(
+            value: arguments['cubit'] as HomeCubit,
+          child: TaskDetailsScreen(
+            taskModel: arguments['taskModel'] as TaskResponseModel,
+          ),));
+
       default:
         return null;
     }

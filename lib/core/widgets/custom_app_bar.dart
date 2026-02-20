@@ -9,7 +9,8 @@ import '../theming/styles.dart';
 class CustomAppBar extends StatelessWidget {
   final String title;
   final String ?icon;
-  const CustomAppBar({super.key,required this.title, this.icon});
+  final String ?taskId;
+  const CustomAppBar({super.key,required this.title, this.icon, this.taskId});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class CustomAppBar extends StatelessWidget {
       Text(title,style: TextStyles.font16BlackBold,),
       const Spacer(),
       if(icon!=null)
-        PopEditMenu(iconUrl: icon!,),
+        PopEditMenu(iconUrl: icon!,taskId: taskId!,),
     ],);
   }
 }

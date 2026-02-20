@@ -7,6 +7,8 @@ class ApiConstants {
   static const String uploadImage="upload/image";
   static const String createTasks="todos";
   static const String getTasks="todos";
+  static const String deleteTasks="todos/{id}";
+
 
 }
 

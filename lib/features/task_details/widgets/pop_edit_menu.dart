@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/theming/styles.dart';
+import '../../home/logic/home_cubit.dart';
 
 class PopEditMenu extends StatelessWidget {
   final String iconUrl;
-  const PopEditMenu({super.key, required this.iconUrl});
+  final String taskId;
+  const PopEditMenu({super.key, required this.iconUrl, required this.taskId});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +43,8 @@ class PopEditMenu extends StatelessWidget {
       onSelected: (value) {
         if (value == 'edit') {
         } else if (value == 'delete') {
+          print("Attempting to delete task: $taskId");
+          context.read<HomeCubit>().deleteTask(taskId);
         }
       },
     );
