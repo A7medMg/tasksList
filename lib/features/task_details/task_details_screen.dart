@@ -35,7 +35,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomAppBar(title: "Task Details",icon:"assets/svgs/3dots.svg" ,taskId:widget.taskModel.id ,),
+              CustomAppBar(title: "Task Details",icon:"assets/svgs/3dots.svg" ,taskId:widget.taskModel.id ,taskModel: widget.taskModel,),
               verticalSpacing(12),
               SizedBox(
                 height:225 .h,
