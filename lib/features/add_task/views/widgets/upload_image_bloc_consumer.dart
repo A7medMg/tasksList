@@ -52,8 +52,8 @@ class UploadImageBlocListener extends StatelessWidget {
               loading: ()=> Center(
                 child: SizedBox(
                   width: 24.w,
-                  height: 24.h,
-                  child: CircularProgressIndicator(strokeWidth: 2),
+                  height: 56.h,
+                  child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
                 ),
               ),
               success: ()=>SizedBox(

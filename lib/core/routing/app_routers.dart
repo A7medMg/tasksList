@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/core/routing/routers_name.dart';
+import 'package:todo/features/edit_task/views/edit_task_screen.dart';
 import 'package:todo/features/home/logic/home_cubit.dart';
 import 'package:todo/features/logout/logic/logout_cubit.dart';
 import 'package:todo/features/onboarding/onboarding_screen.dart';
@@ -43,6 +44,10 @@ class AppRouters {
           child: TaskDetailsScreen(
             taskModel: arguments['taskModel'] as TaskResponseModel,
           ),));
+      case RoutersName.editTask:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(builder:(_)=>EditTaskScreen(taskResponseModel:  arguments['taskModel'] as TaskResponseModel) );
+
 
       default:
         return null;
