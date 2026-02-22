@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/core/routing/routers_name.dart';
+import 'package:todo/features/edit_task/views/edit_task_screen.dart';
 import 'package:todo/features/home/logic/home_cubit.dart';
 import 'package:todo/features/logout/logic/logout_cubit.dart';
 import 'package:todo/features/onboarding/onboarding_screen.dart';
@@ -8,6 +9,7 @@ import 'package:todo/features/signup/views/signup_screen.dart';
 
 import '../../features/add_task/logic/add_task_cubit.dart';
 import '../../features/add_task/views/add_task_screen.dart';
+import '../../features/edit_task/logic/edit_task_cubit.dart';
 import '../../features/home/data/models/task_response_model.dart';
 import '../../features/home/views/home_screen.dart';
 import '../../features/login/logic/login_cubit.dart';
@@ -43,6 +45,13 @@ class AppRouters {
           child: TaskDetailsScreen(
             taskModel: arguments['taskModel'] as TaskResponseModel,
           ),));
+      case RoutersName.editTask:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(builder:(_)=>BlocProvider(
+  create: (context) => EditTaskCubit(getIt.get()),
+  child: EditTaskScreen(taskResponseModel:  arguments['taskModel'] as TaskResponseModel),
+) );
+
 
       default:
         return null;
