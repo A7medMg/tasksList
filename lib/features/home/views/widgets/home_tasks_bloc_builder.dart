@@ -33,9 +33,7 @@ class HomeTasksBlocBuilder extends StatelessWidget {
 
              controller: context.read<HomeCubit>().scrollController,
                itemCount: todos.length,
-               itemBuilder: (context,index){
-               return TaskItem(taskModel: index<todos.length?todos[index]:null);
-               }),
+               itemBuilder: (context, index) => TaskItem(taskModel: todos[index]),),
 
            );
 

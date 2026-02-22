@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theming/colors_manager.dart';
 import '../../../../core/theming/styles.dart';
+import '../../logic/home_cubit.dart';
 
 class TaskStateSelection extends StatefulWidget {
   const TaskStateSelection({super.key});
@@ -33,6 +35,7 @@ class _TaskStateSelectionState extends State<TaskStateSelection> {
           return GestureDetector(
             onTap: () {
               setState(() {
+                context.read<HomeCubit>().filterTasks(items[index]);
                 selectedIndex = index;
               });
             },
