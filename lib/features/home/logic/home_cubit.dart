@@ -16,6 +16,9 @@ class HomeCubit extends Cubit<TodoState> {
   List<TaskResponseModel> allTodos = [];
   bool isFetching = false;
   final ScrollController scrollController = ScrollController();
+  String currentStatus = 'All';
+
+
   void setupScrollListener() {
     scrollController.addListener(() {
       var maxScroll = scrollController.position.maxScrollExtent;
@@ -44,7 +47,7 @@ class HomeCubit extends Cubit<TodoState> {
         if (newTodos.isNotEmpty) {
           page++;
           allTodos.addAll(newTodos);
-          emit(TodoState.success(List.from(allTodos)));
+          filterTasks(currentStatus);
         }
         isFetching = false;
       },
@@ -62,19 +65,18 @@ class HomeCubit extends Cubit<TodoState> {
     final backupTask = allTodos[taskIndex];
 
     allTodos.removeAt(taskIndex);
-    emit(TodoState.success(List.from(allTodos)));
+
+    filterTasks(currentStatus);
 
     final result = await getTaskRepo.deleteTask(taskId);
 
     result.when(
       success: (_) {
         emit(const TodoState.deleteActionSuccess());
-        emit(TodoState.success(List.from(allTodos)));
       },
       failure: (error) {
-        // التراجع (Rollback)
         allTodos.insert(taskIndex, backupTask);
-        emit(TodoState.success(List.from(allTodos)));
+        filterTasks(currentStatus);
         emit(TodoState.deleteError(error.apiErrorModel.message ?? "Error"));
       },
     );
@@ -89,4 +91,18 @@ class HomeCubit extends Cubit<TodoState> {
     scrollController.dispose();
     return super.close();
   }
+  void filterTasks(String status) {
+    currentStatus = status;
+
+    if (status == 'All') {
+      emit(TodoState.success(List.from(allTodos)));
+    } else {
+      final filteredList = allTodos.where((task) {
+        return task.status?.toLowerCase() == status.toLowerCase();
+      }).toList();
+
+      emit(TodoState.success(filteredList));
+    }
+  }
 }
+
