@@ -46,7 +46,9 @@ class EditTaskForm extends StatelessWidget {
           CustomTitle(title: "Status"),
           verticalSpacing(8),
           AppDropDownFiled(
-            onChanged: (d){},
+            onChanged: (d){
+              context.read<EditTaskCubit>().status=d;
+            },
             initialValue:context.read<EditTaskCubit>().status!,
             items: [
               DropdownMenuItem(value: "waiting", child: Text("Waiting",style: TextStyles.font16PrimaryBold,)),
@@ -63,7 +65,9 @@ class EditTaskForm extends StatelessWidget {
           CustomTitle(title: "Priority"),
           verticalSpacing(8),
           AppDropDownFiled(
-            onChanged: (d){},
+            onChanged: (d){
+              context.read<EditTaskCubit>().priority=d;
+            },
             items: [
               DropdownMenuItem(value: "low", child: Text("Low Priority",style: TextStyles.font16PrimaryBold,)),
               DropdownMenuItem(value: "medium", child: Text("Medium Priority",style: TextStyles.font16PrimaryBold,)),
