@@ -9,6 +9,7 @@ import 'package:todo/features/signup/views/signup_screen.dart';
 
 import '../../features/add_task/logic/add_task_cubit.dart';
 import '../../features/add_task/views/add_task_screen.dart';
+import '../../features/edit_task/logic/edit_task_cubit.dart';
 import '../../features/home/data/models/task_response_model.dart';
 import '../../features/home/views/home_screen.dart';
 import '../../features/login/logic/login_cubit.dart';
@@ -46,7 +47,10 @@ class AppRouters {
           ),));
       case RoutersName.editTask:
         final arguments = settings.arguments as Map<String, dynamic>;
-        return MaterialPageRoute(builder:(_)=>EditTaskScreen(taskResponseModel:  arguments['taskModel'] as TaskResponseModel) );
+        return MaterialPageRoute(builder:(_)=>BlocProvider(
+  create: (context) => EditTaskCubit(getIt.get()),
+  child: EditTaskScreen(taskResponseModel:  arguments['taskModel'] as TaskResponseModel),
+) );
 
 
       default:

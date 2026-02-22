@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo/core/theming/styles.dart';
+import '../theming/colors_manager.dart';
 
-import '../../../../core/theming/colors_manager.dart';
-import '../../logic/add_task_cubit.dart';
 
-class AppDropDownFiled extends StatefulWidget {
+class AppDropDownFiled extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final InputBorder? enabledBorder;
   final InputBorder? focusedBorder;
@@ -14,29 +12,25 @@ class AppDropDownFiled extends StatefulWidget {
   final Widget? prefixIcon;
   final Color? fillColor;
   final String initialValue;
+  final List<DropdownMenuItem<dynamic>> items;
+  final void Function(dynamic) onChanged;
 
 
-  const AppDropDownFiled({super.key, this.contentPadding, this.enabledBorder, this.focusedBorder, this.suffixIcon, this.prefixIcon, this.fillColor, required this.initialValue});
-
-  @override
-  State<AppDropDownFiled> createState() => _AppDropDownFiledState();
-}
-
-class _AppDropDownFiledState extends State<AppDropDownFiled> {
+  const AppDropDownFiled({super.key, this.contentPadding, this.enabledBorder, this.focusedBorder, this.suffixIcon, this.prefixIcon, this.fillColor, required this.initialValue, required this.items, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<dynamic>(
 
-      initialValue:widget.initialValue,
+      value:initialValue,
       decoration:InputDecoration(
-        fillColor:widget.fillColor,
-        filled:widget.fillColor?.value!=null ?true:false ,
-        suffixIcon: widget.suffixIcon,
-        prefixIcon:widget.prefixIcon ,
+        fillColor:fillColor,
+        filled:fillColor?.value!=null ?true:false ,
+        suffixIcon: suffixIcon,
+        prefixIcon:prefixIcon ,
         isDense: true,
         contentPadding:
-        widget.contentPadding ??
+        contentPadding ??
             EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
@@ -53,7 +47,7 @@ class _AppDropDownFiledState extends State<AppDropDownFiled> {
           ),
         ),
         enabledBorder:
-        widget.enabledBorder ??
+        enabledBorder ??
             OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(
@@ -62,7 +56,7 @@ class _AppDropDownFiledState extends State<AppDropDownFiled> {
               ),
             ),
         focusedBorder:
-        widget.focusedBorder ??
+        focusedBorder ??
             OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(
@@ -71,16 +65,9 @@ class _AppDropDownFiledState extends State<AppDropDownFiled> {
               ),
             ),),
 
-      items: [
-        DropdownMenuItem(value: "low", child: Text("Low Priority",style: TextStyles.font16PrimaryBold,)),
-        DropdownMenuItem(value: "medium", child: Text("Medium Priority",style: TextStyles.font16PrimaryBold,)),
-        DropdownMenuItem(value: "high", child: Text("High Priority",style: TextStyles.font16PrimaryBold,)),
-      ],
-      onChanged: (dynamic d) {
-        setState(() {
-          context.read<AddTaskCubit>().priority=d;
-        });
+      items:items,
+      onChanged: onChanged,
 
-      },);
+     );
   }
 }

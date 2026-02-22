@@ -8,6 +8,7 @@ class ApiConstants {
   static const String createTasks="todos";
   static const String getTasks="todos";
   static const String deleteTasks="todos/{id}";
+  static const String updateTasks="todos/{id}";
 
 
 }

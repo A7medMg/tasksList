@@ -5,9 +5,10 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/helper/spacing.dart';
 import '../../../../core/theming/colors_manager.dart';
+import '../../../../core/theming/styles.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../../logic/add_task_cubit.dart';
-import 'app_drop_down_filed.dart';
+import '../../../../core/widgets/app_drop_down_filed.dart';
 import 'custom_title.dart';
 
 class AddTaskForm extends StatefulWidget {
@@ -49,6 +50,14 @@ class _AddTaskFormState extends State<AddTaskForm> {
           CustomTitle(title: "Priority"),
           verticalSpacing(8),
           AppDropDownFiled(
+            onChanged: (d){
+              context.read<AddTaskCubit>().priority=d;
+            },
+            items: [
+              DropdownMenuItem(value: "low", child: Text("Low Priority",style: TextStyles.font16PrimaryBold,)),
+              DropdownMenuItem(value: "medium", child: Text("Medium Priority",style: TextStyles.font16PrimaryBold,)),
+              DropdownMenuItem(value: "high", child: Text("High Priority",style: TextStyles.font16PrimaryBold,)),
+            ],
             initialValue: context.read<AddTaskCubit>().priority,
 
             suffixIcon: SvgPicture.asset("assets/svgs/Arrow - Down 4.svg"),

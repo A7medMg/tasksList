@@ -12,6 +12,7 @@ import 'package:todo/features/login/data/models/login_respons_body.dart';
 import 'package:todo/features/signup/data/model/register_request_body.dart';
 import 'package:todo/features/signup/data/model/register_response_body.dart';
 
+import '../../features/edit_task/data/models/edit_task_request_body.dart';
 import '../../features/profile/data/models/profile_info_model.dart';
 part"api_services.g.dart";
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
@@ -47,6 +48,11 @@ abstract class ApiServices {
   @DELETE(ApiConstants.deleteTasks)
   Future<dynamic> deleteTask(
       @Path("id") String id,
+      );
+  @PUT(ApiConstants.updateTasks)
+  Future<dynamic> updateTask(
+      @Path("id") String id,
+      @Body() EditTaskRequestBody editTaskRequestBody,
       );
 
 
